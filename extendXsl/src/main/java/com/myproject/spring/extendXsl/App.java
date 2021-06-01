@@ -22,6 +22,10 @@ public class App
     	//System.out.println(testClass.getClassName());
     	
     	//System.out.println(MLApiClient.post_badNoteData("Chair of Econophysics &amp; Complex Systems, Ecole polytechnique, 91128 Palaiseau Cedex, France"));
-    	//System.out.println(MLApiClient.post_badNoteData("Institut de Recherche en Mathématique et Physique, Université catholique de Louvain, Louvain-la-Neuve, B-1348, Belgium"));
+    	
+    	//String ApiOutput = MLApiClient.post_badNoteData("Institut de Recherche en Mathématique et Physique, Université catholique de Louvain, Louvain-la-Neuve, B-1348, Belgium");
+    	//System.out.println(ApiOutput);
+    	//System.out.println("===================");
+    	//System.out.println(MLApiClient.EntityResolver(ApiOutput));
     }
 }

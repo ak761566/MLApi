@@ -59,18 +59,16 @@ public class MLApiClient {
 	 * }
 	 */
 	
-	public static String post_badBibData(String inputString) {
-	//public static String postNet_badData() {
-		//String xmlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?><brs:b xmlns:brs=\"http://innodatalabs.com/brs\"><brs:r>Centers for Disease Control and Prevention. Viral Hepatitis-Hepatitis C Information [Internet]. 2016. Available from: http://www.cdc.gov/hepatitis/hcv/hcvfaq.htm. Cited 9 Jun 2016.</brs:r></brs:b>";
-		//inputString = StringEscapeUtils.escapeHtml4(inputString);
-		inputString = stringEncoding.encodeHtml(inputString);
-		String xmlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?><brs:b xmlns:brs=\"http://innodatalabs.com/brs\"><brs:r>"+ inputString +"</brs:r></brs:b>";	
+	public static String EntityResolver(String inputString) {
 		
-		xmlString = StringEscapeUtils.escapeHtml4(xmlString);
+		String xmlString = inputString.replaceAll("&amp;#([a-zA-Z0-9]+)</brs:s>;", "&#$1;</brs:s>");
 		
-		xmlString = xmlString.replace("&", "&amp;");
-		xmlString = xmlString.replace("&amp;amp", "&amp;");
 		
+		/*
+		 * Pattern codePattern = Pattern.compile("&amp(\\.*)</brs:s>;"); Matcher
+		 * string_matcher = codePattern.matcher(xmlString);
+		 */
+				
 		xmlString = xmlString.replace("&amp;Ccedil;", "&Ccedil;");
 		xmlString = xmlString.replace("&amp;ccedil;", "&ccedil;");
 		xmlString = xmlString.replace("&amp;Aacute;", "&Aacute;");
@@ -93,10 +91,50 @@ public class MLApiClient {
 		xmlString = xmlString.replace("&amp;otilde;", "&otilde;");
 		xmlString = xmlString.replace("&amp;oacute;", "&oacute;");
 		xmlString = xmlString.replace("&amp;uacute;", "&uacute;");
+		
+		return xmlString;
 
+	}
+	
+	public static String post_badBibData(String inputString) {
+	//public static String postNet_badData() {
+		//String xmlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?><brs:b xmlns:brs=\"http://innodatalabs.com/brs\"><brs:r>Centers for Disease Control and Prevention. Viral Hepatitis-Hepatitis C Information [Internet]. 2016. Available from: http://www.cdc.gov/hepatitis/hcv/hcvfaq.htm. Cited 9 Jun 2016.</brs:r></brs:b>";
+		//inputString = StringEscapeUtils.escapeHtml4(inputString);
+		inputString = stringEncoding.encodeHtml(inputString);
+		String xmlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?><brs:b xmlns:brs=\"http://innodatalabs.com/brs\"><brs:r>"+ inputString +"</brs:r></brs:b>";	
+		
+		//xmlString = StringEscapeUtils.escapeHtml4(xmlString);
+		
+		xmlString = xmlString.replace("&", "&amp;");
+		xmlString = xmlString.replace("&amp;amp", "&amp;");
+		
+		/*
+		 * xmlString = xmlString.replace("&amp;Ccedil;", "&Ccedil;"); xmlString =
+		 * xmlString.replace("&amp;ccedil;", "&ccedil;"); xmlString =
+		 * xmlString.replace("&amp;Aacute;", "&Aacute;"); xmlString =
+		 * xmlString.replace("&amp;Acirc;", "&Acirc;"); xmlString =
+		 * xmlString.replace("&amp;Atilde;", "&Atilde;"); xmlString =
+		 * xmlString.replace("&amp;Eacute;", "&Eacute;"); xmlString =
+		 * xmlString.replace("&amp;Ecirc;", "&Ecirc;"); xmlString =
+		 * xmlString.replace("&amp;Iacute;", "&Iacute;"); xmlString =
+		 * xmlString.replace("&amp;Ocirc;", "&Ocirc;"); xmlString =
+		 * xmlString.replace("&amp;Otilde;", "&Otilde;"); xmlString =
+		 * xmlString.replace("&amp;Oacute;", "&Oacute;"); xmlString =
+		 * xmlString.replace("&amp;Uacute;", "&Uacute;"); xmlString =
+		 * xmlString.replace("&amp;aacute;", "&aacute;"); xmlString =
+		 * xmlString.replace("&amp;acirc;", "&acirc;"); xmlString =
+		 * xmlString.replace("&amp;atilde;", "&atilde;"); xmlString =
+		 * xmlString.replace("&amp;eacute;", "&eacute;"); xmlString =
+		 * xmlString.replace("&amp;ecirc;", "&ecirc;"); xmlString =
+		 * xmlString.replace("&amp;iacute;", "&iacute;"); xmlString =
+		 * xmlString.replace("&amp;ocirc;", "&ocirc;"); xmlString =
+		 * xmlString.replace("&amp;otilde;", "&otilde;"); xmlString =
+		 * xmlString.replace("&amp;oacute;", "&oacute;"); xmlString =
+		 * xmlString.replace("&amp;uacute;", "&uacute;");
+		 */
 		
 		
-		System.out.println(xmlString);
+		//System.out.println(xmlString);
 		
 		try {
 		
@@ -203,6 +241,11 @@ public class MLApiClient {
 		//return fileName;
 		//return taskStatusUrl;
 		//return status + " " + taskStatusUrl;
+		
+		//inputString.replaceAll("&amp;#([a-zA-Z0-9]+)</brs:s>;", "&#$1;</brs:s>");
+		out = out.replaceAll("&amp;#([a-zA-Z0-9]+)</brs:s>;", "&#$1;</brs:s>");
+		out = out.replaceAll("&amp;#([a-zA-Z0-9]+);", "&#$1;");
+		
 		return  out;
  		
 		}catch(Exception e) {
@@ -217,9 +260,9 @@ public class MLApiClient {
 		//public static String postNet_badData() {
 			//String xmlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?><brs:b xmlns:brs=\"http://innodatalabs.com/brs\"><brs:r>Centers for Disease Control and Prevention. Viral Hepatitis-Hepatitis C Information [Internet]. 2016. Available from: http://www.cdc.gov/hepatitis/hcv/hcvfaq.htm. Cited 9 Jun 2016.</brs:r></brs:b>";
 		  //inputString = StringEscapeUtils.escapeHtml4(inputString);
-		System.out.println("=====Original String ======");
-		System.out.println(inputString);
-		System.out.println("=====Original String ======");
+		//System.out.println("=====Original String ======");
+		//System.out.println(inputString);
+		//System.out.println("=====Original String ======");
 		
 		inputString = stringEncoding.encodeHtml(inputString);
 		
@@ -230,32 +273,35 @@ public class MLApiClient {
 		  xmlString = xmlString.replace("&", "&amp;");
 		  xmlString = xmlString.replace("&amp;amp", "&amp;");
 		  
-		  xmlString = xmlString.replace("&amp;Ccedil;", "&Ccedil;");
-			xmlString = xmlString.replace("&amp;ccedil;", "&ccedil;");
-			xmlString = xmlString.replace("&amp;Aacute;", "&Aacute;");
-			xmlString = xmlString.replace("&amp;Acirc;", "&Acirc;");
-			xmlString = xmlString.replace("&amp;Atilde;", "&Atilde;");
-			xmlString = xmlString.replace("&amp;Eacute;", "&Eacute;");
-			xmlString = xmlString.replace("&amp;Ecirc;", "&Ecirc;");
-			xmlString = xmlString.replace("&amp;Iacute;", "&Iacute;");
-			xmlString = xmlString.replace("&amp;Ocirc;", "&Ocirc;");
-			xmlString = xmlString.replace("&amp;Otilde;", "&Otilde;");
-			xmlString = xmlString.replace("&amp;Oacute;", "&Oacute;");
-			xmlString = xmlString.replace("&amp;Uacute;", "&Uacute;");
-			xmlString = xmlString.replace("&amp;aacute;", "&aacute;");
-			xmlString = xmlString.replace("&amp;acirc;", "&acirc;");
-			xmlString = xmlString.replace("&amp;atilde;", "&atilde;");
-			xmlString = xmlString.replace("&amp;eacute;", "&eacute;");
-			xmlString = xmlString.replace("&amp;ecirc;", "&ecirc;");
-			xmlString = xmlString.replace("&amp;iacute;", "&iacute;");
-			xmlString = xmlString.replace("&amp;ocirc;", "&ocirc;");
-			xmlString = xmlString.replace("&amp;otilde;", "&otilde;");
-			xmlString = xmlString.replace("&amp;oacute;", "&oacute;");
-			xmlString = xmlString.replace("&amp;uacute;", "&uacute;");
-			
-			System.out.println("=====Encoded String before ML service processing ======");
-			System.out.println(xmlString);
-			System.out.println("=====Encoded String before ML service processing ======");
+		/*
+		 * xmlString = xmlString.replace("&amp;Ccedil;", "&Ccedil;"); xmlString =
+		 * xmlString.replace("&amp;ccedil;", "&ccedil;"); xmlString =
+		 * xmlString.replace("&amp;Aacute;", "&Aacute;"); xmlString =
+		 * xmlString.replace("&amp;Acirc;", "&Acirc;"); xmlString =
+		 * xmlString.replace("&amp;Atilde;", "&Atilde;"); xmlString =
+		 * xmlString.replace("&amp;Eacute;", "&Eacute;"); xmlString =
+		 * xmlString.replace("&amp;Ecirc;", "&Ecirc;"); xmlString =
+		 * xmlString.replace("&amp;Iacute;", "&Iacute;"); xmlString =
+		 * xmlString.replace("&amp;Ocirc;", "&Ocirc;"); xmlString =
+		 * xmlString.replace("&amp;Otilde;", "&Otilde;"); xmlString =
+		 * xmlString.replace("&amp;Oacute;", "&Oacute;"); xmlString =
+		 * xmlString.replace("&amp;Uacute;", "&Uacute;"); xmlString =
+		 * xmlString.replace("&amp;aacute;", "&aacute;"); xmlString =
+		 * xmlString.replace("&amp;acirc;", "&acirc;"); xmlString =
+		 * xmlString.replace("&amp;atilde;", "&atilde;"); xmlString =
+		 * xmlString.replace("&amp;eacute;", "&eacute;"); xmlString =
+		 * xmlString.replace("&amp;ecirc;", "&ecirc;"); xmlString =
+		 * xmlString.replace("&amp;iacute;", "&iacute;"); xmlString =
+		 * xmlString.replace("&amp;ocirc;", "&ocirc;"); xmlString =
+		 * xmlString.replace("&amp;otilde;", "&otilde;"); xmlString =
+		 * xmlString.replace("&amp;oacute;", "&oacute;"); xmlString =
+		 * xmlString.replace("&amp;uacute;", "&uacute;");
+		 * 
+		 * System.out.println("=====Encoded String before ML service processing ======"
+		 * ); System.out.println(xmlString);
+		 * System.out.println("=====Encoded String before ML service processing ======"
+		 * );
+		 */
 			
 			
 			try {
@@ -321,7 +367,7 @@ public class MLApiClient {
 			String statusResponse = getReq_APIConversionStatus(taskStatusUrl);
 			
 			String jsonTaskStatusObj = statusResponse;
-			System.out.println("jsonTaskStatusObj: " + jsonTaskStatusObj);
+			//System.out.println("jsonTaskStatusObj: " + jsonTaskStatusObj);
 			Pattern stausPattern = Pattern.compile("\"completed\": (true|false)");
 			Matcher status_matcher = stausPattern.matcher(jsonTaskStatusObj);
 			String status = null;
@@ -356,6 +402,9 @@ public class MLApiClient {
 			//return fileName;
 			//return taskStatusUrl;
 			//return status + " " + taskStatusUrl;
+			out = out.replaceAll("&amp;#([a-zA-Z0-9]+)</brs:s>;", "&#$1;</brs:s>");
+			out = out.replaceAll("&amp;#([a-zA-Z0-9]+);", "&#$1;");
+			
 			return  out;
 	 		
 			}catch(Exception e) {
