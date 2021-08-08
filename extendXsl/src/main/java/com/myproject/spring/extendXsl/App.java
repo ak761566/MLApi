@@ -23,9 +23,27 @@ public class App
     	
     	//System.out.println(MLApiClient.post_badNoteData("Chair of Econophysics &amp; Complex Systems, Ecole polytechnique, 91128 Palaiseau Cedex, France"));
     	
-    	//String ApiOutput = MLApiClient.post_badNoteData("Institut de Recherche en Mathématique et Physique, Université catholique de Louvain, Louvain-la-Neuve, B-1348, Belgium");
-    	//System.out.println(ApiOutput);
+    	String ApiOutput = MLApiClient.post_badNoteData("Institut de Recherche en Mathématique et Physique, Université catholique de Louvain, Louvain-la-Neuve, B-1348, Belgium");
+    	System.out.println(ApiOutput);
     	//System.out.println("===================");
     	//System.out.println(MLApiClient.EntityResolver(ApiOutput));
+    	
+    	//System.out.println("===================");
+    	//System.out.println("===================");
+    	
+    	//ApiOutput = MLApiClient.post_badNoteData("Instituto de Ciencias Físicas, Universidad Nacional Autónoma de México, Cuernavaca 62210, México");
+    	//System.out.println(ApiOutput);
+    	
+    	//ApiOutput = MLApiClient.post_badNoteData("Instituto de Física, Benemérita Universidad Autónoma de Puebla, Apartado Postal J-48, 72570 Puebla, México");
+    	//System.out.println(ApiOutput);
+    	
+    	//ApiOutput = MLApiClient.post_badNoteData("Instituto de Ciencias Físicas, Universidad Nacional Autónoma de México, Cuernavaca 62210, México and Centro Internacional de Ciencias, Cuernavaca 62210, México");
+    	//System.out.println(ApiOutput);
+    	
+    	ApiOutput = MLApiClient.post_badNoteData("Centro de Astrobiología (CSIC-INTA), Ctra. de Ajalvir, Km 4, E-28850, Torrejón de Ardoz, Madrid, Spain");
+    	System.out.println(ApiOutput);
+    	
+    	ApiOutput = MLApiClient.post_badNoteData("Instituto de Ciencias Físicas, Universidad Nacional Autónoma de México, Cuernavaca 62210, México and Centro Internacional de Ciencias, Cuernavaca 62210, México");
+    	System.out.println(ApiOutput);
     }
 }

@@ -246,6 +246,12 @@ public class MLApiClient {
 		out = out.replaceAll("&amp;#([a-zA-Z0-9]+)</brs:s>;", "&#$1;</brs:s>");
 		out = out.replaceAll("&amp;#([a-zA-Z0-9]+);", "&#$1;");
 		
+		out = out.replaceAll("&#([a-zA-Z0-9]+);</brs:s><brs:s l=\"[a-zA-Z]+\">", "&#$1;");
+		out = out.replaceAll("&#([a-zA-Z0-9]+);</brs:s>([a-zA-Z]+),", "&#$1;$2</brs:s>,");
+		out = out.replaceAll("&#([a-zA-Z0-9]+);</brs:s>([a-zA-Z]+)\\s*", "&#$1;$2</brs:s> ");
+		
+		out = out.replaceAll("\\s([a-zA-Z]*)&#([a-zA-Z0-9]+);<brs:s l=\"([a-zA-Z]+)\">", "<brs:s l=\"$3\">$1&#$2;");
+		out = out.replaceAll("<brs:s l=\"([a-zA-Z]+)\">([a-zA-Z]+)&amp;#</brs:s>([a-zA-Z0-9]+);<brs:s l=\"([a-zA-Z]+)\">", "<brs:s l=\"$1\">$2&#$3;");
 		return  out;
  		
 		}catch(Exception e) {
@@ -263,6 +269,9 @@ public class MLApiClient {
 		//System.out.println("=====Original String ======");
 		//System.out.println(inputString);
 		//System.out.println("=====Original String ======");
+		//System.out.println("****Input String*****");
+		//System.out.println(inputString);
+		//System.out.println("****Input String*****");
 		
 		inputString = stringEncoding.encodeHtml(inputString);
 		
@@ -404,6 +413,13 @@ public class MLApiClient {
 			//return status + " " + taskStatusUrl;
 			out = out.replaceAll("&amp;#([a-zA-Z0-9]+)</brs:s>;", "&#$1;</brs:s>");
 			out = out.replaceAll("&amp;#([a-zA-Z0-9]+);", "&#$1;");
+			
+			out = out.replaceAll("&#([a-zA-Z0-9]+);</brs:s><brs:s l=\"[a-zA-Z]+\">", "&#$1;");
+			out = out.replaceAll("&#([a-zA-Z0-9]+);</brs:s>([a-zA-Z]+),", "&#$1;$2</brs:s>,");
+			out = out.replaceAll("&#([a-zA-Z0-9]+);</brs:s>([a-zA-Z]+)\\s*", "&#$1;$2</brs:s> ");
+			
+			out = out.replaceAll("\\s([a-zA-Z]*)&#([a-zA-Z0-9]+);<brs:s l=\"([a-zA-Z]+)\">", "<brs:s l=\"$3\">$1&#$2;");
+			out = out.replaceAll("<brs:s l=\"([a-zA-Z]+)\">([a-zA-Z]+)&amp;#</brs:s>([a-zA-Z0-9]+);<brs:s l=\"([a-zA-Z]+)\">", "<brs:s l=\"$1\">$2&#$3;");
 			
 			return  out;
 	 		
